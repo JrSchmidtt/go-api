@@ -9,7 +9,9 @@ import (
 )
 
 var (
+	// database string connection
 	StringConnection = ""
+	// api port
 	Port             = 0
 )
 
@@ -22,9 +24,10 @@ func LoadDotEnv() {
 	if err != nil {
 		Port = 9000
 	}
-	StringConnection = fmt.Sprintf("%s:%s@%s?charset=utf8&parseTime=True&Loc=Local",
+	StringConnection = fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8&parseTime=True&loc=Local",
 		os.Getenv("DB_USER"),
 		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_HOST"),
 		os.Getenv("DB_NAME"),
 	)
 }
